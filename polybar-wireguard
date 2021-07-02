@@ -6,7 +6,7 @@
 # https://github.com/polybar/polybar/wiki/Formatting#format-tags-inside-polybar-config
 green=#55aa55
 
-configs_path="$HOME/.scripts"
+configs_path="/PATH/TO/CONF/FILES"
 connected_interface=$(sudo wg | grep interface | cut -d " " -f2)
 
 connect() {
