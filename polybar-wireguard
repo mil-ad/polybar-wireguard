@@ -11,7 +11,7 @@ connected_interface=$(sudo wg | grep interface | cut -d " " -f2)
 
 connect() {
     selected_config=$(ls $configs_path/*.conf | xargs basename -a -s .conf | dmenu)
-    [[ selected_config ]] && sudo wg-quick up $configs_path/"$selected_config".conf
+    [[ $selected_config ]] && sudo wg-quick up "$configs_path"/"$selected_config".conf
 }
 
 disconnect() {
@@ -31,7 +31,7 @@ toggle() {
 print() {
     if [[ $connected_interface ]]
     then
-        echo %{u$green}%{+u}%{T4}%{F$green}%{T-}%{F-} $connected_interface
+        echo %{u"$green"}%{+u}%{T4}%{F"$green"}%{T-}%{F-} "$connected_interface"
     else
         echo %{T4}%{T-}
     fi
