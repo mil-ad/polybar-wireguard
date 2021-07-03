@@ -20,7 +20,7 @@ disconnect() {
     # let's do this in a loop:
     for connected_config in $(sudo wg | grep interface | cut -d " " -f2)
     do
-        sudo wg-quick down $connected_config
+        sudo wg-quick down $configs_path/"$connected_config".conf
     done
 }
 
