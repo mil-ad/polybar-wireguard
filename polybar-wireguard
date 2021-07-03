@@ -11,7 +11,7 @@ connected_interface=$(sudo wg | grep interface | cut -d " " -f2)
 
 connect() {
     selected_config=$(ls $configs_path/*.conf | xargs basename -a -s .conf | dmenu)
-    [[ selected_config ]] && sudo wg-quick up $selected_config
+    [[ selected_config ]] && sudo wg-quick up $configs_path/"$selected_config".conf
 }
 
 disconnect() {
