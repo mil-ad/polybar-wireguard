@@ -25,7 +25,12 @@ disconnect() {
 }
 
 toggle() {
-    [[ $connected_interface ]] && disconnect || connect
+    if [[ $connected_interface ]]
+    then
+        disconnect
+    else
+        connect
+    fi
 }
 
 print() {
