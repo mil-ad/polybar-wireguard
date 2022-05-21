@@ -7,7 +7,7 @@
 green=#55aa55
 
 configs_path="/PATH/TO/CONF/FILES"
-connected_interface=$(sudo wg | grep interface | cut -d " " -f2)
+connected_interface=$(networkctl | grep -P "\d+ .* wireguard routable" -o | cut -d" " -f2)
 
 connect() {
     selected_config=$(ls $configs_path/*.conf | xargs basename -a -s .conf | dmenu)
@@ -18,7 +18,7 @@ disconnect() {
     # Normally we should have a single connected interface but technically
     # there's nothing stopping us from having multiple active intgerfaces so
     # let's do this in a loop:
-    for connected_config in $(sudo wg | grep interface | cut -d " " -f2)
+    for connected_config in $(networkctl | grep -P "\d+ .* wireguard routable" -o | cut -d" " -f2)
     do
         sudo wg-quick down $configs_path/"$connected_config".conf
     done
