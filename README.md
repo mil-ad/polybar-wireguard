@@ -9,15 +9,16 @@ A simple Polybar script to display and control WireGuard VPNs.
 
 ## Dependencies
 
-* `dmenu` - so that you can select a WireGuard config from a menu when connecting. This can be replace by something like [rofi](https://github.com/davatorium/rofi) or removed altogether by hard-coding a config in the script.
+* `dmenu` so that you can select a WireGuard config from a menu when connecting. This can be replaced by something like [rofi](https://github.com/davatorium/rofi) or removed altogether by hard-coding a config in the script. You can find my version of `dmenu` [here](https://github.com/mil-ad/dmenu).
+* `networkctl` to query currently connected interface without needing sudo. I [used to](https://github.com/mil-ad/polybar-wireguard/blob/838ec1c59f9b9686bece53f9d6e470ff51e35d06/polybar-wireguard#L10) use `wg` for this but `wg` needs sudo access and calling it in a loop generated a lot of warnings and logs.
 * [Material design icons](https://github.com/google/material-design-icons/releases) for the ![image](./vpn_lock_icon.png) icon.
 
 ## Installation
 
-1. `wg` and `wg-quick` binaries need sudo access to run which isn't great news for scripting. I have therefore added a specific rule to my `/etc/sudoers` (via `visudo`) to make them password-less:
+1. `wg-quick` binary needs sudo access to run which isn't great news for scripting. I have therefore added a specific rule to my `/etc/sudoers` (via `visudo`) to make them password-less:
 
 ```
-INSERT_YOUR_USERNAME ALL = (root) NOPASSWD: /usr/bin/wg,/usr/bin/wg-quick
+INSERT_YOUR_USERNAME ALL = (root) NOPASSWD: /usr/bin/wg-quick
 ```
 
 ⚠️ You obviously don't want to do this for a user who doesn't already have sudo access! WireGuard let's you to [add hooks](https://github.com/pirate/wireguard-docs#postup) for various events which could let a non-sudo user run arbitrary code.
