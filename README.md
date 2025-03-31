@@ -37,8 +37,8 @@ font-3 = Material Icons:style=Regular:size=15
 ```ini
 [module/wireguard]
 type = custom/script
-exec = /PATH/TO/wireguard_polybar
+exec = /PATH/TO/wireguard-polybar
 tail = false
 interval = 1
-click-left = /PATH/TO/wireguard_polybar --toggle &
+click-left = /PATH/TO/wireguard-polybar --toggle &
 ```
